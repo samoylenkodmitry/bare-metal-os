@@ -47,16 +47,22 @@ Or using cargo run (if configured):
 cargo run
 ```
 
+![Rust OS running](cargo_run.webp)
+
 ### Running Assembly Boot Code
 To run the assembly boot code variants:
 
 ```bash
 # Run first boot code variant
 make run1
+```
+![First boot code - Text mode demo](make_run1.webp)
 
+```bash
 # Run second boot code variant
 make run2
 ```
+![Second boot code - Circle graphics demo](make_run2.webp)
 
 The assembly variants demonstrate:
 - `run1`: A simple 16-bit real mode bootloader that displays a message and echoes keyboard input
