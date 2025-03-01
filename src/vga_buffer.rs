@@ -115,6 +115,21 @@ impl Writer {
             self.buffer.chars[row][col].write(blank);
         }
     }
+
+    // Add this new method for handling backspace
+    pub fn backspace(&mut self) {
+        if self.column_position > 0 {
+            self.column_position -= 1;
+            let row = BUFFER_HEIGHT - 1;
+            let col = self.column_position;
+            
+            // Write a space at the current position to clear the character
+            self.buffer.chars[row][col].write(ScreenChar {
+                ascii_character: b' ',
+                color_code: self.color_code,
+            });
+        }
+    }
 }
 
 impl fmt::Write for Writer {
@@ -139,4 +154,11 @@ macro_rules! println {
 pub fn _print(args: fmt::Arguments) {
     use core::fmt::Write;
     WRITER.lock().write_fmt(args).unwrap();
+}
+
+// Add a public function for backspace handling
+#[doc(hidden)]
+pub fn backspace() {
+    use core::fmt::Write;
+    WRITER.lock().backspace();
 }
